@@ -1,4 +1,4 @@
-<!-- markdownlint-disable-next-line force commit-->
+<!-- markdownlint-disable-next-line-->
 <div align="center">
 
   <!-- markdownlint-disable-next-line -->
