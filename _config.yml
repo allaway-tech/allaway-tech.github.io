@@ -23,7 +23,7 @@ description: >-                        # used by seo meta and the atom feed
   A very slowly updated blog.
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
-url: 'https://blog.allaway.tech/jekyll-theme-chirpy'
+url: 'https://test.blog.allaway.tech'
 
 github:
   username: harmanhobbit             # change to your github username
@@ -144,7 +144,7 @@ paginate: 10
 
 # Change the following value to '/PROJECT_NAME' ONLY IF your site type is GitHub Pages Project sites
 # and doesn't have a custom domain.
-baseurl: '/jekyll-theme-chirpy'
+baseurl: ''
 
 # ------------ The following options are not recommended to be modified ------------------
 
