@@ -4,7 +4,6 @@ title: How to disable the DHCP server on a TP-link Deco mesh network
 date: 2023-08-03
 categories: [Networking, DHCP] # Can be anything
 tags: [tp-link,deco,wi-fi,network,dhcp,pfsense,firewall] # Must be lowercase
-img_path: /media/posts/images/2023-08-05-tp-link-deco-dhcp
 ---
 
 # How to disable the DHCP server on a TP-link Deco mesh network   
@@ -32,13 +31,13 @@ Before we dive into why this works, we should probably do a brief recap of how t
 5. The final step is any of the other DHCP servers listening in the network will now drop any addresses that had reserved for that MAC address, as they have now been told (by the broadcast DHCP Request packet) that the device is accepting a different address.   
    
 All of this can be seen in the screenshot below.   
-![A Wireshark packet capture showing the DHCP process.](normal_dhcp_request.png)    
+![A Wireshark packet capture showing the DHCP process.](/media/posts/images/2023-08-05-tp-link-deco-dhcp/normal_dhcp_request.png)    
 From the picture you can see that the DHCP server appears to be on the address 10.101.2.1 and the IP address that it is offering us is 10.101.2.226. I'm not too worried about redacting these IPs, as this packet capture was performed on a public Wi-Fi of a train. So any insight you can gather about the network has very little relevance to me.   
 Normally, it is a bad idea to have more than one DHCP server in the network. The reason for this is if they are not configured correctly then there is the risk of bad IP addresses or duplicates being handed out as the multiple servers do not keep track of address that they haven't offered out. I know above I mentioned that you can have multiple DHCP servers, but this is more geared towards having redundant DHCP and is beyond the scope of this post.    
 ## **Proper testing**   
 After running the setup for a day or so, I started to wonder what was actually going on on the network. To test this, I decided to use Wireshark to test and see what actually happens when a device connects and tries to get an IP address. 
    
-![A Wireshark packet capture show a negative return from one DHCP server and an IP address offer from a second.](double_dhcp.png)    
+![A Wireshark packet capture show a negative return from one DHCP server and an IP address offer from a second.](/media/posts/images/2023-08-05-tp-link-deco-dhcp/double_dhcp.png)    
 From the packet capture, you can see that the process is pretty much the same. We have the Deco DHCP server on 192.168.X.254 and pfSense on 192.168.X.253. The only difference is there are a couple of additional packets sent from the Deco DHCP server. These packets are both NAK or Negative acknowledgment. This is the DHCP coming back to tell the device that it does not have any more IP addresses left to assign. If we only had the one DHCP server, then our device would not get and IP address and would not be able to connect to the network. As we do have a second DHCP server, it also receives the broadcasted packets and replies with a DHCP offer which, hopefully, our device accepts.   
 Something else to note is there is an extra DHCP Request and ACK/NAK reply in this packet capture. This is due to me clicking the renew DHCP lease button on macOS, which seems to start the process off by resending the current IP address as a Request.   
 ## **Summing up/TL;DR**   
