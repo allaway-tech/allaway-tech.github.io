@@ -4,12 +4,11 @@ title: Home Assistant Alexa smart home integration over Cloudflare
 date: 2022-07-01
 categories: [Home Assistant, Cloudflare] # Can be anything
 tags: [hass,homeassistant,cloudflare,firewall] # Must be lowercase
-img_path: /media/posts/images/2022-07-01-cloudflare-hass
 ---
 
 Today I decided it was the day that I was going to manage to get Alexa to talk to my Home Assistant (HA). There are a couple of things that made this slightly difficult for me. The first was that I had limited access to my domain only to the UK. The second was a setting I didn't even know was on but after finding it I didn't want to turn it off. Something that made it a little hard to track down was that the error message was being masked by an error that is commonly encountered during the setup process.
 
-![Cloudflare error returned to AWS Lambda](/cfhasserror.jpg){: width="350" height="350" }
+![Cloudflare error returned to AWS Lambda](/media/posts/images/2022-07-01-cloudflare-hass/cfhasserror.jpg){: width="350" height="350" }
 
 ## TL;DR
 If you are running your Home Assitant instance through Cloudflare and your Alexa cannot connect or successfully get an authentication token then check your Bot Fight setting and Web Application Firewall rules.
@@ -20,7 +19,7 @@ When I first started self-hosting I was getting some random hits on my domains. 
 ## Solving the first problem - Wrong country
 From the photo above you can see that I was getting an INVALID_AUTHORIZATION_CREDENTIAL error. What I didn't realize for a very long time is that the body of my error was different from the one that was in the video tutorial I was following. After realizing that I had a different error I straight away started to google it. What took me the longest was tracking down what was causing the 1020 error. Eventually, I realized that it was coming from Cloudflare and not from my Home Assistant server. Once I knew which logs I should be looking at it was much easier to track down the exact problem to fix it. It turns out that it was because of the decision I had taken a year ago that I explained above. To test my theory I added the county that I was using to run my AWS Lambda function into another rule and, hey presto, I was able to get a response back from my HA server.
 
-![AWS Lambda function returning a successful result from Home Assistant](lambda_success.png)
+![AWS Lambda function returning a successful result from Home Assistant](/media/posts/images/2022-07-01-cloudflare-hass/lambda_success.png)
 
 ## Solving the second problem - Bots
 The next problem was not quite so easy to track down. Once I had the Lambda function working I moved on to trying to get the authentication going. Knowing that it was probably my WAF that was going to be causing the problem gave me a head start on tracking the problem down. Watching the logs as I tried to sign in showed that several requests were being issued a JavaScript bot challenge. And as it was a bot trying to sign in it was of course failing to do so. A slightly secondary issue was that the bot seemed to be coming from the USA and not Ireland or the United Kingdom as I had been expecting.
