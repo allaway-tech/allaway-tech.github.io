@@ -9,7 +9,7 @@ img_path: /media/posts/images/2022-07-01-cloudflare-hass
 
 Today I decided it was the day that I was going to manage to get Alexa to talk to my Home Assistant (HA). There are a couple of things that made this slightly difficult for me. The first was that I had limited access to my domain only to the UK. The second was a setting I didn't even know was on but after finding it I didn't want to turn it off. Something that made it a little hard to track down was that the error message was being masked by an error that is commonly encountered during the setup process.
 
-![Cloudflare error returned to AWS Lambda](cfhasserror.jpg){: width="350" height="350" }
+![Cloudflare error returned to AWS Lambda](/cfhasserror.jpg){: width="350" height="350" }
 
 ## TL;DR
 If you are running your Home Assitant instance through Cloudflare and your Alexa cannot connect or successfully get an authentication token then check your Bot Fight setting and Web Application Firewall rules.
