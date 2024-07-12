@@ -23,7 +23,7 @@ description: >-                        # used by seo meta and the atom feed
   A very slowly updated blog.
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
-url: 'https://test.blog.allaway.tech'
+url: 'https://blogtest.allaway.tech'
 
 github:
   username: harmanhobbit             # change to your github username
@@ -37,7 +37,7 @@ social:
     # The first element serves as the copyright owner's link
     - https://github.com/harmanhobbit       # change to your github homepage
     # Uncomment below to add more social links
-    - https://twitter.com/username      # change to your twitter homepage
+    # - https://twitter.com/username      # change to your twitter homepage
     # - https://www.facebook.com/username
     # - https://www.linkedin.com/in/username
 
@@ -93,7 +93,7 @@ theme_mode: dark
 cdn: https://media.allaway.tech/blog
 
 # the avatar on sidebar, support local or CORS resources
-avatar: https://media.allaway.tech/blog/assets/img/favicons/android-chrome-512x512.png
+avatar: https://media.allaway.tech/blogassets/img/favicons/android-chrome-512x512.png
 
 # The URL of the site-wide social preview image used in SEO `og:image` meta tag.
 # It can be overridden by a customized `page.image` in front matter.
