@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Raspberry Pi Zero QLab playhead
-date: 2024-07-08
+date: 2024-07-10
 categories: [QLab, Raspberry Pi] # Can be anything
 tags: [qlab,raspberrypi,usbgadet,dhcp,python,osc] # Must be lowercase
 img_path: /media/posts/images/2024-07-08-qlab-playhead
