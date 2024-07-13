@@ -4,25 +4,22 @@ title: Raspberry Pi Zero QLab playhead
 date: 2024-07-10
 categories: [QLab, Raspberry Pi] # Can be anything
 tags: [qlab,raspberrypi,usbgadet,dhcp,python,osc] # Must be lowercase
-img_path: /media/posts/images/2024-07-08-qlab-playhead
+# img_path: /media/posts/images/2024-07-08-qlab-playhead/
 ---
 
 # A Raspberry Pi Zero play head for QLab test
-This is a little project that I have had on the back burner for a little while. I recently had a little more time in my schedule and managed to get to a working state.
+This is a little project that I have had on the back burner for a little while. I recently had a little more time in my schedule and managed to get to a working state. So what is it? It is a Raspberry Pi Zero with a TM1637 screen on it which shows us the cue number of the playhead for a QLab session on an Apple mac attached via USB.
 
-### What is it?
-It is a Raspberry Pi Zero with a TM1637 screen on it which shows us the cue number of the playhead for a QLab session on an Apple mac attached via USB.
-
-TODO: Picture montage of a raspberry pi with QLab logo and 7 segment display number over the top
+![Picture montage of a raspberry pi with QLab logo and 7 segment display number over the top](/media/posts/images/2024-07-08-qlab-playhead/splash-image.png)
 
 ### Why would I want this?
 I work professionally in theatre on a (slightly off) West End show. We use a piece of software called QLab to playback and control the hardware for sound and lighting. QLab is very much the industry standard for this use case. However, there are rare situations where the software can fail. Due to this it is very common to have a change over device within the system that allows us to switch all of the sound and control from a main to a backup mac. Sometimes the two mac can get out of sync and you have no way of knowing without toggling between the two different video outputs. An easy solution would be to put a second screen on the backup mac but a lot of control positions are often quite small or located within the audience where the excess light is undesirable. There are a few software based solutions out there if you know where to look but this again relies on there being another computer with a screen that you don't mind running an app on.
 
 ### Why is your solution better?
-The project started when one of my old Sound No. 2s asked me if it was possible to run the software solution (yes the show I work on has the spare computer situation) on a Raspberry Pi with a screen. After thinking about it for a little while I pointed out that the app that we use was mac only app so no it wouldn't. It also had been created by the sound designer and is hard coded to look for our backup QLab mac so unless you always put a mac on that IP address it's not going to work in another network. After thinking a little longer on it I realised that actually a Raspberry Pi Zero was a perfect candidate to make this a hardware device.
+The project started when one of my old Sound No. 2s asked me if it was possible to run the software solution (yes the show I work on has the spare computer situation) on a Raspberry Pi with a screen. After thinking about it for a little while I pointed out that the app that we use was mac only app so no it wouldn't. It also was created by the sound designer and is hard coded to look for our backup QLab mac so unless you always put a mac on that IP address it's not going to work in another network. After thinking a little longer on it I realised that actually a Raspberry Pi Zero was a perfect candidate to make this a hardware device.
 
 ### Why is the Raspberry Pi Zero perfect?
-Unlike other Raspberry Pis (when I started thinking about this) the Pi Zero can be used in what's called gadget mode. This means that it can imitate other types of device over its USB port. This means that if connected to another computer it can be seen as an input device (mouse or keyboard), a MIDI or an ethernet device. Why is this useful? Well we can get the Pi to imitate a ethernet device and then (with some DHCP wizardry) communicate with QLab using OSC commands. This project could, however, be adapted for a full size pi and use the built in NIC to access the QLab session over a network rather than directly from the USB port. I would suggest that you skip the DHCP server part as this would possibly cause havoc on your LAN.
+Unlike other Raspberry Pis (when I started thinking about creating this project) the Pi Zero can be used in what's called gadget mode. This means that it can imitate other types of device over its USB port. This means that if connected to another computer it can be seen as an input device (mouse or keyboard), a MIDI or an ethernet device. Why is this useful? Well we can get the Pi to imitate a ethernet device and then (with some DHCP wizardry) communicate with QLab using OSC commands. This project could, however, be adapted for a full size pi and use the built in NIC to access the QLab session over a network rather than directly from the USB port. I would suggest that you skip the DHCP server part as this would possibly wreak havoc on your LAN.
 
 ### What would we like the device to do?
 This is the list that I decided to work from when starting the project:
@@ -123,7 +120,7 @@ The pinout required to hook the display up is as follows:
 
   #TODO: add picture of display attached to pi
 
-![A TM1637 display connected to a Rapberry Pi Zero](pi-with-screen.png)
+![A TM1637 display connected to a Rapberry Pi Zero](/media/posts/images/2024-07-08-qlab-playhead/pi-with-screen.png)
 
 This is nice and simple and should take someone who is electronically minded about 5 minutes to do. (I managed to do it twice very quickly when I swapped from the 4 to 6 digit display).
 
@@ -137,6 +134,13 @@ Navigate to the folder that you would like to install the project to and run the
 To get the project running we need to run the following command from within the project directory `pip3 install --requirement ./requirements.txt`. This will then reach out to the python servers and install any packages that I decided to use. Now we can cross our fingers and run `python3 LED.py` and if everything is good your screen should light up and show the start up including the version number of the pi playhead code.
 
 Now the only thing left to do is make the script start when the pi boots. This is a very easy step but I hit a slight speed bump during this step. When I was testing I thought to myself "I want to start this on boot. Let's do that as root so it will all be hunky dory.". This line of thought turned out to be wrong. You need to add the following line to the crontab of whatever user you have just tested the project on. If you don't, like I did, then the script will fail to run and you're more than likely to not know why as the error will disappear very quickly off your screen (if you are even using one) very quickly. It turns out that as we haven't run the pip3 command as root then the dependencies aren't installed for root and therefore it can't run the script.
+
+### Let's take a look at what the script actually does
+
+```python
+python code will go here
+```
+{: file='LED.py'}
 
 #### A note about "direct" mode
 The eagle eyed of you may notice that in the specification of the device I used the term direct mode. This is currently how the device operates but I have been kicking an idea around that you may be able to attach a USB ethernet connector to the pi and then get the playhead data from a mac that is elsewhere. Why would this be useful? You could have 3 of these pi playheads and use them as such:
