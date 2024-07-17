@@ -16,11 +16,11 @@ This is the manual for the Raspberry Pi playhead project. If you are looking for
 ## Getting started
 To boot the pi playhead you will require a USB A to micro USB cable. This cable connects between a USB port on the host mac (running a QLab session) and the data port on the Raspberry Pi Zero. Once the pi playhead is connected it will start the boot process automatically. Once the system has loaded you will see the message:
 
-![A rendering of a seven segment screen reading STARTI](/media/posts/images/2024-07-08-qlab-playhead/starti.png)
+![A rendering of a seven segment screen reading LOADIN](/media/posts/images/2024-07-08-qlab-playhead/loadin.png)
 
 Followed by the version number of the software that the playhead is running. At the time of writing this guide that should be:
 
-![A rendering of a seven segment screen reading V0.0.3](/media/posts/images/2024-07-08-qlab-playhead/v0.0.3.png)
+![A rendering of a seven segment screen reading V0.1.3](/media/posts/images/2024-07-08-qlab-playhead/v0.1.3.png)
 
 Once the playhead has successfully connected to the QLab session the it will display a six character truncated cue number of the cue that the playhead is sitting on.
 
@@ -60,7 +60,7 @@ To set the refresh rate of the screen send the following message to the playhead
 /settings/refresh X
 ```
 Where X is a time in seconds expressed as a decimal. 
-The defaultid TODO: check default.
+The default is: 0.25
  > Use this setting wisely. For every refresh rate period the pi playhead will first send a ICMP ping message to ascertain if the mac is there and the send an OSC message requesting the position of the pi playhead. The lower the value of X the more network traffic that the pi playhead will produce.
  {: .prompt-warning }
  
