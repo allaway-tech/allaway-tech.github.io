@@ -28,7 +28,7 @@ Once the playhead has successfully connected to the QLab session the it will dis
 
 To control the pi playhead you will need to add it as a network destination in QLab.
 
-TODO: screenshots of settings a new network to QLab
+TODO: gif screenshots of settings a new network to QLab
 
 The playhead assign two IP addresses. One for the playhead itself and one for the mac. The playhead will always default to the IP address `192.168.123.1/32` and the mac to `192.168.123.2/32`. The playhead also listen from messages from QLab on port `53001` as this is the default that Qlab replies to OSC messages on.
 
@@ -38,11 +38,13 @@ Off:
 ```OSC
 /settings/blank true
 ```
+(The blank setting is on and nothing is displayed on the screen)
 
 On:
 ```OSC
 /settings/blank false
 ```
+(The blank setting is off and the playhead position is displayed on the screen)
  > Using this setting will only turn the screen off. The pi playhead will continue to request the position of the playhead in QLab but not write the result to the screen.
  {: .prompt-warning}
 
@@ -52,7 +54,10 @@ To set the brightness of the screen send the following message to the playhead u
 /settings/brightness X
 ```
 Where X is in the range 1 - 7.
-The default is TODO: check default.
+The default is: 3
+
+> Your mileage may vary with this setting. Although the screen I used responds to 7 different brightness levels but I can only see about 3 changes by eye.
+{: .prompt-info}
 
 ### Refresh rate
 To set the refresh rate of the screen send the following message to the playhead using a QLab network cue:
@@ -65,7 +70,21 @@ The default is: 0.25
  {: .prompt-warning }
  
 ### Update the software version
-  > Updating the software version is only recommended for those familiar with a Linux operating system
+
+#### The easy/safe way
+Get a new SD card and follow the how to make guide from start to finish. If you fail to rebuild the update then you can always swap back to the old SD card.
+
+#### The proper way
+  > Updating the software version via this method is only recommended for those familiar with a Linux operating system
   {: .prompt-danger}
-
-
+  1. Take your pi playhead and connect it to a screen and keyboard.
+  2. Connect to a Wi-Fi network with internet access
+  3. Run the command `sudo apt update && sudo apt upgrade -y` (update the operating system on the Raspberry Pi)
+  4. Navigate to the project folder
+  5. Run the command `git pull origin` (get new updates from the online repository)
+  6. Resolve any merge conflicts (this should only happen if you have modified the original install so I'm assuming you'll know how to do this yourself)
+  7. Follow any instructions on the release page to fix any breaking changes
+  8. Test that the functionality still matches what you would expect
+  
+### Licence
+TODO: copy MIT licence from GitHub
