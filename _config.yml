@@ -23,7 +23,7 @@ description: >-                        # used by seo meta and the atom feed
   A very slowly updated blog.
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
-url: 'https://blogtest.allaway.tech'
+url: 'https://blog.allaway.tech'
 
 github:
   username: harmanhobbit             # change to your github username
