@@ -5,10 +5,9 @@ date: 2024-07-16
 categories: [NixOS, DevOps] # Can be anything
 tags: [nixos,devops,flakes] # Must be lowercase
 ---
+![The NixOS logo with other logos on top](media/posts/images/2024-07-20-nixos-devops/nix-devops-splash.png)
+
 # NixOS DevOps pt1
-
-TODO: link to udemy course
-
 About 18 months ago I took an excellent Udemy course by [Predrag Mijatovic](https://github.com/predmijat) called [Realworld DevOps project from start to finish](https://udemy.com/course/real-world-devops-project-from-start-to-finish). It is a very insightful walk through of building a basic DevOps platform from a basic VPS image up. Predrag's course focuses on Arch Linux and Ansible to build out the system which produces a repeatable process. I even ended up nuking my home assistant install and now it lives on Arch and was built with an Ansible playbook. This was all good until I lost that playbook when the hard drive in my laptop failed. That's right folk. Rookie move here. **Lesson 1:**
 
  > Always backup your ansible playbooks
