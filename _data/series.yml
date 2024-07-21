@@ -2,3 +2,8 @@
   title: Pi Playhead
   description:
     A python project to use a Raspberry Pi Zero as a QLab playhead indicator.
+
+- id: nixos-devops
+  title: NixOS DevOps
+  description:
+    A blow by blow attempt to build a basic DevOps platform based on NixOS.
