@@ -1,0 +1,4 @@
+- id: pi-playhead
+  title: Pi Playhead
+  description:
+    A python project to use a Raspberry Pi Zero as a QLab playhead indicator.

@@ -4,6 +4,7 @@ title: Raspberry Pi QLab playhead manual
 date: 2024-07-18
 categories: [QLab, Raspberry Pi] # Can be anything
 tags: [qlab,raspberrypiplayhead] # Must be lowercase
+series: pi-playhead
 # img_path: /media/posts/images/2024-07-08-qlab-playhead/
 ---
 

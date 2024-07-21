@@ -1,0 +1,22 @@
+{% if page.series %}
+<section>
+  <h2 class="panel-heading">Part of the {{ site.data.series | where: 'id', page.series | map: 'title' }} series</h2>
+  <div class="d-flex flex-wrap mt-3 mb-1 me-3">
+  <ol class="content list-unstyled ps-0 pb-1 ms-1 mt-2">
+    {% assign series-posts = site.posts | reverse | where: 'series', page.series %}
+    {% for post in series-posts %}
+    <li class="text-truncate lh-lg">
+      {% if post.url == page.url %}
+      {{ post.title }}
+      {% else %}
+      <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
+      {% endif %}
+    </li>
+    {% endfor %}
+  </ol>
+  </div>
+  {% if series-posts.size == 1 %}
+  <p>More posts coming soon!</p>
+  {% endif %}
+</section>
+{% endif %}
