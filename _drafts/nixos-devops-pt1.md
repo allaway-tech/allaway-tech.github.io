@@ -2,6 +2,7 @@
 layout: post
 title: NixOS DevOps
 date: 2024-07-16
+series: nixos-devops
 categories: [NixOS, DevOps] # Can be anything
 tags: [nixos,devops,flakes] # Must be lowercase
 ---
