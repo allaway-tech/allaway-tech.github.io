@@ -1,7 +1,7 @@
 <!-- markdownlint-disable-next-line force update-->
 <div align="center">
 
-  <!-- markdownlint-disable-next-line -->
+  <!-- markdownlint-disable-next-line force update -->
   # Chirpy Jekyll Theme
 
   A minimal, responsive, and feature-rich Jekyll theme for technical writing.
