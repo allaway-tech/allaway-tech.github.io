@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Part 1 - NixOS DevOps introduction
+title: Part 1 - Introduction - NixOS DevOps
 date: 2024-07-16
 series: nixos-devops
 categories: [NixOS, DevOps] # Can be anything
