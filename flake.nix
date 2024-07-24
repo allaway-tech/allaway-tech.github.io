@@ -18,6 +18,7 @@
             buildInputs = [ bundler steam-run ];
             shellHook = ''
               alias sr="steam-run bundle exec jekyll serve -l --drafts --trace"
+              alias jc="bundle exec jekyll post"
             '';
           };
         }
