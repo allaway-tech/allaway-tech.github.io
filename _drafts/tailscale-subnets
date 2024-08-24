@@ -1,0 +1,22 @@
+Of late I have seen a couple of posts on Reddit where people have been asking why they cannot access a tailscale node via the local network if it is part of a subnet that is already being routed to their tailnet. I myself have found this problem in the past and have usually fixed by running `tailscale up --reset` and then `tailscale up` withouth the `--accept-routes` flag. This make it work but if we want to have that node able to access other subnets that are being routed on the tailnet we have to make the decision between local or remote access. After this small spate of people asking (and not really getting a proper explanation as to why it doesn't work) I decided to take a bit of a further look at it.
+
+I setup three VPS nodes to take a look at what is going on. I am using Hetzner to demonstrate this as it is a VPS provider that I am the most familiar with at the moment. This is the lab that I setup:
+  - Three VPS's are connected to the same network (10.0.0.0/24)
+  - One VPS does not have tailscale installed (name Harry)
+  - One VPS has tailscale installed and is running a subnet router for that network (name Hermione)
+  - One VPS has tailscale installed and we will be adding the `--accept-routes` flag (name Ron)
+
+Just for comparison I am going to list the output of the following commands here: `tcpdump icmp --interface any` and `tracepath xxx.xxx.xxx.xxx`.
+
+
+Demo pics
+
+
+As you can see from these the network is behaving as we expect. All nodes can communicate across the LAN and those on the tailnet (Hermione and Ron) can also communicate there. So what happens if we set the `--accept-routes` flag for Ron?
+
+
+More demo pics
+
+Well as you can see, Hermione can still talk to Ron. She can also talk to Harry. Ron can talk to both Harry and Hermione but Harry can only talk to Hermione. Why is this? If we look at the results of both the tcpdump and tracepaths we can see that there is now a difference in Ron's routing since we enabled the `--accept-routes` flag for Ron. Before the flag was set Ron knew that Harry was available via XXXXXX interface. Now he thinks that Harry is available via the tailscale0 interface. This means that when a packet comes in through the XXXXX interface (from Harry), Ron then replies via the tailscale0 interface. However, the tailnet isn't expecting packets for Harry as it is unaware that Harry has been talking to Ron so drops the packets. This part is a little bit of a guess as I am not a tailscale premium customer so can't see the network logs.
+
+So why is Ron talking to Harry successful? Well, when Ron starts the conversation it goes out via the tailscale0 interface
