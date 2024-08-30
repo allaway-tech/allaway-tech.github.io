@@ -1,10 +1,11 @@
 Of late I have seen a couple of posts on Reddit where people have been asking why they cannot access a tailscale node via the local network if it is part of a subnet that is already being routed to their tailnet. I myself have found this problem in the past and have usually fixed by running `tailscale up --reset` and then `tailscale up` withouth the `--accept-routes` flag. This make it work but if we want to have that node able to access other subnets that are being routed on the tailnet we have to make the decision between local or remote access. After this small spate of people asking (and not really getting a proper explanation as to why it doesn't work) I decided to take a bit of a further look at it.
 
 I setup three VPS nodes to take a look at what is going on. I am using Hetzner to demonstrate this as it is a VPS provider that I am the most familiar with at the moment. This is the lab that I setup:
-  - Three VPS's are connected to the same network (10.0.0.0/24)
+  - Four VPS's are connected to two different networks
   - One VPS does not have tailscale installed (name Harry)
   - One VPS has tailscale installed and is running a subnet router for that network (name Hermione)
   - One VPS has tailscale installed and we will be adding the `--accept-routes` flag (name Ron)
+  - And the final VPS (in the )
 
 Just for comparison I am going to list the output of the following commands here: `tcpdump icmp --interface any` and `tracepath xxx.xxx.xxx.xxx`.
 
