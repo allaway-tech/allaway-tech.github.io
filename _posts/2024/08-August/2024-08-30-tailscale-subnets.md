@@ -10,7 +10,7 @@ Of late I have seen a couple of posts on Reddit where people have been asking wh
 I would you preface this post with a disclaimer that I am neither a network nor a Linux professional. I would class myself as an advanced amateur and this is just me documenting my findings. I also know that the font on the pictures I have included is quite small but at time we have a lot of data on the screen that we need to see.
 
 ## Setting up the test lab
-To test this I used terraform to spin up a lab on Hetzner. Using cloudinit I joined Ron and Hermione to my tailnet with a pre-authenticated key. This is the relevant section from terraform that describes the lab ([TLDR below](#tldr))[^footnote1]:
+To test this I used terraform to spin up a lab on Hetzner. Using cloudinit I joined Ron and Hermione to my tailnet with a pre-authenticated key. This is the relevant section from terraform that describes the lab ([TL;DR below](#tldr))[^footnote1]:
 ```terraform
 resource "hcloud_network" "Hogwarts" {
   name     = "Hogwarts"
@@ -124,7 +124,7 @@ resource "hcloud_server" "Krum" {
 }
 ```
 
-### TLDR:
+### TL;DR
   - Network 1 (Hogwarts) - 10.0.1.0/24
   - Network 2 (Durmstrang) - 10.1.1.0/24
   - VPS 1 (Harry) connected to Hogwarts no tailscale
